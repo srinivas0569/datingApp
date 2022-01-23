@@ -29,6 +29,26 @@ namespace API.Data.Migrations
 
                     b.ToTable("Users");
                 });
+
+            modelBuilder.Entity("API.Entities.UserData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserData");
+                });
 #pragma warning restore 612, 618
         }
     }
