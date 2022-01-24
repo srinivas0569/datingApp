@@ -1,0 +1,49 @@
+<h1>{{title}}</h1>
+<div class="row">
+  <div class="col-6">
+    <ng-container *ngIf="users?.length>0">
+      <table id="users">
+        <tr>
+          <th>Users</th>
+        </tr>
+        <tr *ngFor="let user of users">
+          <td>
+            <div class="d-flex justify-content-between">
+              <a href="#" (click)="openEditPopup(user.id)">{{user.userName}}</a>
+              <a style="cursor: pointer;" (click)="deleteUser(user.id)">X</a>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </ng-container>
+  </div>
+  <div class="col-6 form-group align-items-center d-flex">
+    <!-- <form [formGroup]="form" class="row"> -->
+      <!-- <div class="col-8 px-2">
+        <input type="text" class="form-control" formControlName="userName">
+      </div> -->
+      <button type="button" class="btn btn-primary col-4" (click)="createPopup()">Create User</button>
+    <!-- </form> -->
+  </div>
+</div>
+<ng-template #userPopup>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form" class="row">
+      <div class="col-8 px-2">
+        <input type="text" class="form-control" formControlName="userName">
+      </div>
+      <ng-container *ngIf="form.get('id').value;else create">
+        <button type="button" class="btn btn-primary col-4" (click)="editUser(form)">Edit User</button>
+      </ng-container>
+      <ng-template #create>
+        <button type="button" class="btn btn-primary col-4" (click)="createUser()">Create User</button>
+      </ng-template>
+    </form>
+  </div>
+</ng-template>
